@@ -32,4 +32,6 @@ Some of the additions that enabled the camera as an input include:
 
 **a. Find, install, and try out a node-based library and try to incorporate into your lab. Document your successes and failures (totally okay!) for your writeup. This will help others in class figure out cool new tools and capabilities.**
 
+To expand on the Video Doorbell concept, I tried adding to it with the package `face-recognition` to detect where faces are in the frame. If these images can be cropped it could then be possible to predict identities of the people at my door instead of just confirming it's a person.
+
 **b. Upload a video of your working modified project**
