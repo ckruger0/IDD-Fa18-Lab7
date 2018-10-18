@@ -16,6 +16,12 @@
 
 **a. Compare `helloYou/server.js` and `IDD-Fa18-Lab7/pictureServer.js`. What elements had to be added or changed to enable the web camera? (Hint: It might be good to know that there is a UNIX command called `diff` that compares files.)**
 
+Some of the additions that enabled the camera as an input include:
+- Adding a picture capture settings variable, such as width/height/quality.
+- Creating an instance of `NodeWebcam` using aforementioned settings.
+- Adding a `socket.on('takePicture')` function to handle what happens behind the scenes when a picture is taken.
+  - This includes creating a unique imagename based on datetime, collecting the actual image data, and emitting the two joined together as an output.
+
 **b. Include a video of your working video doorbell**
 
 ## Part C. Make it your own
