@@ -133,13 +133,14 @@ io.on('connect', function(socket) {
 
     //Third, the picture is  taken and saved to the `public/`` folder
     NodeWebcam.capture('public/'+imageName, opts, function( err, data ) {
-      Jimp.read('public/'+imageName, (err, lenna) => {
+    io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
+    Jimp.read('public/'+imageName, (err, lenna) => {
         if (err) throw err;
         lenna
           .greyscale() // set greyscale
           .write('public/'+imageName); // save
       });
-    io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
+    io.emit('newPicture',(imageName+'.jpg'));
     /// The browser will take this new name and load the picture from the public folder.
   });
 
