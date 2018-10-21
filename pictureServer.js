@@ -134,17 +134,21 @@ io.on('connect', function(socket) {
     //Third, the picture is  taken and saved to the `public/`` folder
     NodeWebcam.capture('public/'+imageName, opts, function( err, data ) {
     io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
+    /// The browser will take this new name and load the picture from the public folder.
+    });
+  });
+
+  // if you get the 'ledOFF' msg, send an 'L' to the Arduino
+  socket.on('gray', function() {
     Jimp.read('public/'+imageName+'.jpg', (err, lenna) => {
         if (err) throw err;
         lenna
           .greyscale() // set greyscale
           .write('public/'+imageName+'.jpg'); // save
       });
-    io.emit('newPicture',(imageName+'.jpg'));
-    /// The browser will take this new name and load the picture from the public folder.
+    io.emit('newPicture',('public/'+imageName+'.jpg'));
   });
 
-  });
   // if you get the 'disconnect' message, say the user disconnected
   socket.on('disconnect', function() {
     console.log('user disconnected');
