@@ -21,7 +21,8 @@ line input.
 
 var express = require('express'); // web server application
 var app = express(); // webapp
-var Jimp = require('jimp');
+var fs = require('fs')
+  , gm = require('gm').subClass({imageMagick: true});
 var http = require('http').Server(app); // connects http library to server
 var io = require('socket.io')(http); // connect websocket library to server
 var serverPort = 8000;
@@ -110,6 +111,16 @@ io.on('connect', function(socket) {
 
     //Third, the picture is  taken and saved to the `public/`` folder
     NodeWebcam.capture('public/'+imageName, opts, function( err, data ) {
+      gm(imageName+'.jpg')
+        .flip()
+        .magnify()
+        .rotate('green', 45)
+        .blur(7, 3)
+        .crop(300, 300, 150, 130)
+        .edge(3)
+        .write(imageName+'.jpg', function (err) {
+          if (!err) console.log('crazytown has arrived');
+        })
     io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
     /// The browser will take this new name and load the picture from the public folder.
 
@@ -136,17 +147,6 @@ io.on('connect', function(socket) {
     io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
     /// The browser will take this new name and load the picture from the public folder.
     });
-  });
-
-  // if you get the 'ledOFF' msg, send an 'L' to the Arduino
-  socket.on('gray', function() {
-    Jimp.read('public/'+imageName+'.jpg', (err, lenna) => {
-        if (err) throw err;
-        lenna
-          .greyscale() // set greyscale
-          .write('public/'+imageName+'.jpg'); // save
-      });
-    io.emit('newPicture',('public/'+imageName+'.jpg'));
   });
 
   // if you get the 'disconnect' message, say the user disconnected
