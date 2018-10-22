@@ -22,7 +22,7 @@ line input.
 var express = require('express'); // web server application
 var app = express(); // webapp
 var fs = require('fs')
-  , gm = require('gm').subClass({imageMagick: true});
+var gm = require('gm').subClass({imageMagick: true});
 var http = require('http').Server(app); // connects http library to server
 var io = require('socket.io')(http); // connect websocket library to server
 var serverPort = 8000;
@@ -57,7 +57,7 @@ var opts = { //These Options define how the webcam is operated.
     height: 720,
     quality: 100,
     //Delay to take shot
-    delay: 0,
+    delay: 3,
     //Save shots in memory
     saveShots: true,
     // [jpeg, png] support varies
@@ -111,16 +111,6 @@ io.on('connect', function(socket) {
 
     //Third, the picture is  taken and saved to the `public/`` folder
     NodeWebcam.capture('public/'+imageName, opts, function( err, data ) {
-      gm(imageName+'.jpg')
-        .flip()
-        .magnify()
-        .rotate('green', 45)
-        .blur(7, 3)
-        .crop(300, 300, 150, 130)
-        .edge(3)
-        .write(imageName+'.jpg', function (err) {
-          if (!err) console.log('crazytown has arrived');
-        })
     io.emit('newPicture',(imageName+'.jpg')); ///Lastly, the new name is send to the client web browser.
     /// The browser will take this new name and load the picture from the public folder.
 
