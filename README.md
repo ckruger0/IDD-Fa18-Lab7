@@ -34,6 +34,6 @@ Some of the additions that enabled the camera as an input include:
 
 My original plan to expand on the Video Doorbell concept was to use the package `face-recognition` to place bounding boxes around the faces of people in frame. In practice this was met with many challenges caused by trying to execute on a Rapsberry Pi with javascript. The largest problem was installation of the package itself. The first issue was caused by RPi lacking the package `dlib` which is used for image processing. After manually building it from source on the RPi, `npm install face-recognition` was still failing since it didn't have write access to some root folder. No matter how I tried to change the settings with `sudo` or other permissioning options, I was unsuccessful.
 <BR><BR>
-Following this I tried to do a much simpler approach of changing the taken picture from color to grayscale. This would at least drive home the core concept of workflows in JS and how `io` works. 
+Following this I tried to do a much simpler approach of changing the taken picture from color to grayscale. This would at least drive home the core concept of workflows in JS and how `io` works. Unfortunately both packages `gm` and `Jimp` proved to be unsuccessful in my workflow and would not find the image being captured despite me being able to find it using the `ls` command on the public folder... 
 
 **b. Upload a video of your working modified project**
