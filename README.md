@@ -32,6 +32,8 @@ Some of the additions that enabled the camera as an input include:
 
 **a. Find, install, and try out a node-based library and try to incorporate into your lab. Document your successes and failures (totally okay!) for your writeup. This will help others in class figure out cool new tools and capabilities.**
 
-To expand on the Video Doorbell concept, I tried adding to it with the package `face-recognition` to detect where faces are in the frame. If these images can be cropped it could then be possible to predict identities of the people at my door instead of just confirming it's a person.
+My original plan to expand on the Video Doorbell concept was to use the package `face-recognition` to place bounding boxes around the faces of people in frame. In practice this was met with many challenges caused by trying to execute on a Rapsberry Pi with javascript. The largest problem was installation of the package itself. The first issue was caused by RPi lacking the package `dlib` which is used for image processing. After manually building it from source on the RPi, `npm install face-recognition` was still failing since it didn't have write access to some root folder. No matter how I tried to change the settings with `sudo` or other permissioning options, I was unsuccessful.
+<BR><BR>
+Following this I tried to do a much simpler approach of changing the taken picture from color to grayscale. This would at least drive home the core concept of workflows in JS and how `io` works. 
 
 **b. Upload a video of your working modified project**
