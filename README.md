@@ -37,3 +37,7 @@ My original plan to expand on the Video Doorbell concept was to use the package 
 Following this I tried to do a much simpler approach of changing the taken picture from color to grayscale. This would at least drive home the core concept of workflows in JS and how `io` works. Unfortunately both packages `gm` and `Jimp` proved to be unsuccessful in my workflow and would not find the image being captured despite me being able to find it using the `ls` command on the public folder... 
 
 **b. Upload a video of your working modified project**
+
+In the end I opted to just make it my own by adding a modification that I wanted while attempting to use all the above packages: a delay between button press and picture capture. Previous tests had pictures taken instantly and gave me no time to prep. This new approach gives a 3 second timer. <BR><BR>
+  
+<a href="https://youtu.be/j92LBgNWbC4">Timer Delay in Action</a>
